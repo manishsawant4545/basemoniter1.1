@@ -122,7 +122,7 @@ function extractSourcesFromJSON(sourceCode) {
 async function robustFetchVerifiedSource(address, apiKey) {
   const url = `https://api.basescan.org/api?module=contract&action=getsourcecode&address=${address}&chainId=8453&apikey=${apiKey}`;
   const res = await axios.get(url);
-  log.info(`Basescan API: status=${res.status}, message=${res.data.message}`);
+    log.info(`Basescan API full response: ${JSON.stringify(res.data, null, 2)}`);
   if (res.data.status === '1' && res.data.result && res.data.result[0]) {
     let sourceCode = res.data.result[0].SourceCode;
     if (sourceCode && sourceCode.trim().length > 0) {
@@ -232,3 +232,4 @@ async function monitorBlocks() {
 }
 
 monitorBlocks();
+
